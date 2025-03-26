@@ -1,12 +1,12 @@
-package org.example.controllers;
+package org.example.api.controllers;
 
 import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.example.dto.ChatSessionDto;
-import org.example.factories.ChatSessionDtoFactory;
-import org.example.repositories.ChatSessionRepository;
+import org.example.services.dto.ChatSessionDto;
+import org.example.services.factories.ChatSessionDtoFactory;
+import org.example.model.repositories.ChatSessionRepository;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
@@ -22,7 +22,9 @@ public class ChatSessionController {
     public static final String GET_CHAT_SESSION = "/api/chat/sessions";
 
     @PostMapping(CREATE_CHAT_SESSION)
-    public ChatSessionDto createChatSession(@RequestParam String chatId, String source) {
+    public ChatSessionDto createChatSession(@RequestParam String chatId, String source, String message) {
+
+
 
 
         return chatSessionDtoFactory.makeChatSessionDto(null);
