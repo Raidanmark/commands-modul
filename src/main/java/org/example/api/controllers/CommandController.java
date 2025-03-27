@@ -34,7 +34,7 @@ public class CommandController {
 
 
     @PostMapping(CREATE_COMMAND)
-    public CommandDto createCommand(@RequestParam String name,  Set<Long> availableStatusIds) {
+    public CommandDto createCommand(@RequestParam String name, @RequestParam Set<Long> availableStatusIds) {
 
         Set<StatusEntity> availableStatuses = new HashSet<>(statusRepository.findAllById(availableStatusIds));
 
