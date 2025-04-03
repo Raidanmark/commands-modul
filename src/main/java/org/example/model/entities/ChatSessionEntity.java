@@ -19,7 +19,10 @@ public class ChatSessionEntity {
     @GeneratedValue(strategy = GenerationType.TABLE)
     Long id;
 
-    String source, chatId;
+    String source;
+
+    @Column(unique = true)
+    String chatId;
 
     @Column(nullable = false)
     String status = "INACTIVE";

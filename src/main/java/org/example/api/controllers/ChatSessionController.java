@@ -4,6 +4,8 @@ import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.example.exceptions.BadRequestException;
+import org.example.model.entities.ChatSessionEntity;
 import org.example.services.dto.ChatSessionDto;
 import org.example.services.factories.ChatSessionDtoFactory;
 import org.example.model.repositories.ChatSessionRepository;
@@ -25,9 +27,21 @@ public class ChatSessionController {
     public ChatSessionDto createChatSession(@RequestParam String chatId, String source, String message) {
 
 
+        if (chatId == null || chatId.isEmpty()) {
+            throw new BadRequestException("Chat id cannot be empty");
+        }
 
 
-        return chatSessionDtoFactory.makeChatSessionDto(null);
+
+
+        ChatSessionEntity chatSession = chatSessionRepository.saveAndFlush(
+                ChatSessionEntity.builder()
+                        .chatId(chatId)
+                        .source(source)
+                        .build()
+        );
+
+        return chatSessionDtoFactory.makeChatSessionDto(chatSession);
     }
 
     @GetMapping(GET_CHAT_SESSION)
